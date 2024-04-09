@@ -1,44 +1,42 @@
 namespace Guess_The_Number;
 
-class Game
-{
-    public void GenerateNumber(){
+public class Game
+{  
+    private readonly Player player;
+    private readonly int randomNumber;
     
-        int randomNumber;
-
+    public Game(string playerName)
+        {
         Random generate = new Random();
         randomNumber = generate.Next(1, 101); 
         Console.WriteLine($"\nel numero Random es: {randomNumber}"); 
-
+        player = new Player(playerName);
+        }
+    public void StartPlaying(){
+    
         bool playAgain = true;
 
             while (playAgain)
             {
-                int guess = 0; // el numero que el usuario adiviva
                 int guesses = 0; // numeros de intentos
 
-                Console.WriteLine("Escribe un número entre 1 y 100:"); 
                 // declaro el bucle para inciar la partida
-                while (guess != randomNumber)
+                while (player.LastGuess != randomNumber)
                 {
-                    // Solicitar al usuario que ingrese su suposición
-                    Console.Write("=======>  ");
-                    // Lee la entrada del usuario y convertirla a un número entero
-                    guess = Convert.ToInt32(Console.ReadLine());
-                    // Incremento el contador de intentos
+                    player.MakeGuess();
                     guesses++;
                     // agrego las condiciones de acuerdo a ellas doy pistas al usuario
-                    if (guess > randomNumber)
+                    if (player.LastGuess > randomNumber)
                     {
-                        Console.WriteLine(guess + " es demasiado Alto");
+                        Console.WriteLine(player.LastGuess + " es demasiado Alto");
                     }
-                    else if (guess < randomNumber)
+                    else if (player.LastGuess < randomNumber)
                     {
-                        Console.WriteLine(guess + " es demasiado Bajo");
+                        Console.WriteLine(player.LastGuess + " es demasiado Bajo");
                     }
                     else
                     {
-                        Console.WriteLine(guess + " es Correcto! Lo adivinaste en " + guesses + " intentos.");
+                        Console.WriteLine(player.LastGuess + " es Correcto! Lo adivinaste en " + guesses + " intentos.");
                     }
                 }
                     playAgain = false;
