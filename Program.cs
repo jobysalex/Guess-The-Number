@@ -9,9 +9,10 @@ class Program
         var name = Console.ReadLine();
         Console.WriteLine($"{Environment.NewLine}Hola, {name}!"); 
 
+        Player player = new Player(name = "");
         // Llamar a Game
-        Game numberToGuess = new Game(name = "");
-        numberToGuess.StartPlaying();
+        Game game = new Game(player);
+        game.StartPlaying();
 
     }
 }
