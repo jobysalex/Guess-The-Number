@@ -3,16 +3,16 @@ namespace Guess_The_Number;
 public class Game
 {  
     private readonly Player player;
-    private readonly int randomNumber;
+    private int randomNumber;
     
-    public Game(string playerName)
+    public Game(Player player)
         {
-        Random generate = new Random();
-        randomNumber = generate.Next(1, 101); 
-        Console.WriteLine($"\nel numero Random es: {randomNumber}"); 
-        player = new Player(playerName);
+        this.player = player;
+        InitializeGame();
         }
-    public void StartPlaying(){
+        
+    public void StartPlaying()
+    {
     
         bool playAgain = true;
 
@@ -21,25 +21,44 @@ public class Game
                 int guesses = 0; // numeros de intentos
 
                 // declaro el bucle para inciar la partida
-                while (player.LastGuess != randomNumber)
+                while (player.GetLastGuess() != randomNumber)
                 {
                     player.MakeGuess();
                     guesses++;
                     // agrego las condiciones de acuerdo a ellas doy pistas al usuario
-                    if (player.LastGuess > randomNumber)
+                    if (player.GetLastGuess() > randomNumber)
                     {
-                        Console.WriteLine(player.LastGuess + " es demasiado Alto");
+                        Console.WriteLine(player.GetLastGuess() + " es demasiado Alto");
                     }
-                    else if (player.LastGuess < randomNumber)
+                    else if (player.GetLastGuess() < randomNumber)
                     {
-                        Console.WriteLine(player.LastGuess + " es demasiado Bajo");
+                        Console.WriteLine(player.GetLastGuess() + " es demasiado Bajo");
                     }
-                    else
+                    else if(CheckGuess())
                     {
-                        Console.WriteLine(player.LastGuess + " es Correcto! Lo adivinaste en " + guesses + " intentos.");
+                        Console.WriteLine(player.GetLastGuess() + " es Correcto! Lo adivinaste en " + guesses + " intentos.");
                     }
+
+                    
                 }
                     playAgain = false;
             }
-    }
+        }
+        public void InitializeGame()
+        {
+            RandomNumberGenerator();
+        }
+
+        private void RandomNumberGenerator()
+        {
+        Random generate = new Random();
+        randomNumber = generate.Next(1, 101); 
+        Console.WriteLine($"\nel numero Random es: {randomNumber}"); 
+        }
+
+        private bool CheckGuess()
+        {
+            return player.GetLastGuess() == randomNumber;
+        }
+        
 }
