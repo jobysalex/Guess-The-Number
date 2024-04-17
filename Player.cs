@@ -1,19 +1,23 @@
 namespace Guess_The_Number;
 
-public class Player
+public abstract class Player
 {
       public string Name { get; private set; }
-        public int LastGuess { get; private set; }
-        public Player(string name)
+      public int LastGuess;
+      public List<int> Guesses;
+        protected Player(string name)
         {
             Name = name;
             LastGuess = 0;
+            Guesses = new List<int>();
         }
-
-        public void MakeGuess()
-        {    
-        Console.WriteLine("Escribe un número entre 1 y 100:"); 
-        LastGuess = Convert.ToInt32(Console.ReadLine());
-        }        
-    
+        public abstract void MakeGuess();
+        public int GetLastGuess()
+        {
+            return LastGuess;
+        }
+        public void ResetLastGuess()
+        {
+            LastGuess = 0;
+        }
 }
