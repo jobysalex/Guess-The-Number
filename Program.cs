@@ -9,12 +9,19 @@ class Program
         var name = Console.ReadLine();
         Console.WriteLine($"{Environment.NewLine}Hola, {name}!"); 
 
+        Player player = new Player(name = "");
         // Llamar a Game
+<<<<<<< HEAD
         //Game numberToGuess = new Game(name = "");
         //numberToGuess.StartPlaying();
          HumanPlayer humanPlayer = new HumanPlayer(name = "");
          AIPlayer aiPlayer = new AIPlayer();
          Game game = new Game(humanPlayer, aiPlayer);
          game.StartPlaying();
+=======
+        Game game = new Game(player);
+        game.StartPlaying();
+
+>>>>>>> 7107f3bab1d4694e548ef9c4d75fb50f8a9fce34
     }
 }
