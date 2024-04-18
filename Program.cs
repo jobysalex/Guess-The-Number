@@ -10,8 +10,11 @@ class Program
         Console.WriteLine($"{Environment.NewLine}Hola, {name}!"); 
 
         // Llamar a Game
-        Game numberToGuess = new Game(name = "");
-        numberToGuess.StartPlaying();
-
+        //Game numberToGuess = new Game(name = "");
+        //numberToGuess.StartPlaying();
+         HumanPlayer humanPlayer = new HumanPlayer(name = "");
+         AIPlayer aiPlayer = new AIPlayer();
+         Game game = new Game(humanPlayer, aiPlayer);
+         game.StartPlaying();
     }
 }
